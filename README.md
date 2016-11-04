@@ -2,21 +2,31 @@
 
 A simple crypto service
 
-# Installation
+## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-    gem 'tiny_crypto', :git => "https://github.com/alexw668/tiny_crypto.git"
+gem 'tiny_crypto', :git => "https://github.com/alexw668/tiny_crypto.git"
 ```
 
-And then execute:
+For now I am not sure if I want to release this gem to RubyGems, but if I do and have done that, you can install it by simply typing:
+```
+$ gem install tiny_crypto
+```
+
+or add this line in your Gemfile:
+```ruby
+gem "tiny_crypto"
+```
+
+Don't forget to run the following after you install the gem:
 
 ```
-    $ bundle
+$ bundle
 ```
 
-# Configuration
+## Configuration
 
 A set of attributes should be configured in the gem setup. You can do this anywhere in your application initializer.
 
@@ -41,7 +51,7 @@ TinyCrypto.configuration.aes_key
 TinyCrypto.configuration.aes_iv
 ```
 
-# Usage
+## Usage
 
 Once configured, you can use the service like this:
 
@@ -56,7 +66,7 @@ my_key = svc.encrypted_access_key
 
 ```
 
-# Contributing
+## Contributing
 
 1. Fork it ( https://github.com/alexw668/tiny_crypto/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
