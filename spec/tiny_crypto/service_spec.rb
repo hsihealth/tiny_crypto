@@ -23,6 +23,16 @@ describe TinyCrypto::Service do
   describe "#decrypt_message" do
     let(:message){Base64.encode64("Hellow world!")}
 
+    it "should log exception when the encrypted text can't be decroted" do
+      expect(TinyCrypto.logger).to receive(:error)
+      svc.decrypt_message(message)
+    end
+
+    it "should rethrow error when called with suppress_error being false and text can't be decroted" do
+      expect(TinyCrypto.logger).to receive(:error)
+      expect(lambda{svc.decrypt_message(message, false)}).to raise_error(OpenSSL::Cipher::CipherError)
+    end
+
     it "should decode the message and decrypt it by calling AesCrypt.decrypt with proper parameters and return it base 64 encoded" do
       expect(Base64).to receive(:decode64).with(message).and_return("decoded message")
       expect(TinyCrypto::AesCrypt).to receive(:decrypt).with("decoded message", TinyCrypto.configuration.aes_key, TinyCrypto.configuration.aes_iv, svc.cipher_type)

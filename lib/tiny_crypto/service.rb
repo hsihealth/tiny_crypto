@@ -13,12 +13,13 @@ module TinyCrypto
       Base64.encode64(encrypted)
     end
 
-    def decrypt_message(cipher_text)
+    def decrypt_message(cipher_text, suppress_error=true)
       begin
         decoded = Base64.decode64(cipher_text)
         AesCrypt.decrypt(decoded, TinyCrypto.configuration.aes_key, TinyCrypto.configuration.aes_iv, cipher_type)
       rescue Exception => e
-        Rails.logger.error(e)
+        TinyCrypto.logger.error(e)
+        raise e unless suppress_error
       end
     end
 
